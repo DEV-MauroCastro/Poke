@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
 import { clearPokedexString } from "../utils";
 import { Dialog, Box, Typography } from "@mui/material";
-import pokedexImg from "../imgs/pokedex.png";
+import pokedexImg from "../imgs/poketemplate1.png";
 import { ReactComponent as PokeBallGray } from "../assets/pokeballGraySvg.svg";
 import { ReactComponent as PokemonLogoSvg } from "../assets/pokemonLogoSvg.svg";
 
@@ -91,9 +91,8 @@ const Pokedex = ({ pokeSelect }) => {
       }}
       scroll={"body"}
     >
-      <img className={classes.pokemonImg} src={pokeSelect.gif} alt="pokemon" />
+      <img className={classes.pokemonImg}   src={pokeSelect.gif} alt="pokemon" />
       <Box className={classes.pokemonIcon}>
-        <PokeBallGray width="64" height="64" />
       </Box>
       <Box className={classes.pokemonType}>
         <Typography className={classes.types}>{pokeSelect.types}</Typography>
@@ -113,7 +112,7 @@ const Pokedex = ({ pokeSelect }) => {
       {pokeSelect.stats && (
         <Box className={classes.infos}>
           <Box className={[classes.columns, classes.stats]}>
-            <Typography variant="h4">Stats</Typography>
+            <Typography variant="h3">Caracteristicas:</Typography>
             <Box pt={1}>
               {pokeSelect.stats.map((status) => (
                 <Typography key={status.stat.name}>
@@ -123,7 +122,7 @@ const Pokedex = ({ pokeSelect }) => {
             </Box>
           </Box>
           <Box className={classes.columns}>
-            <Typography variant="h4">Abilities</Typography>
+            <Typography variant="h3">Habilidades:</Typography>
             <Box pt={1}>
               {pokeSelect.abilities.map((abilitiy) => (
                 <Typography key={abilitiy.ability.name}>
