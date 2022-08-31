@@ -27,7 +27,7 @@ const PokeList = () => {
   const [pokemons, setPokemons] = useState([]);
   const [pokemonsAllData, setPokemonsAllData] = useState([]);
   const [pokeSelect, setPokeSelect] = useState(0);
-  const pokesNum = Array.from({ length: 151 }, (_, index) => index + 1);
+  const pokesNum = Array.from({ length: 200 }, (_, index) => index + 1);
 
   const getPokemons = async () => {
     const pokesData = await Promise.all(
@@ -40,21 +40,21 @@ const PokeList = () => {
           id: `#${String(indexPlusOne).padStart(3, "0")}`,
           name: firstLetterUpperCase(data.species.name),
           sprite: data.sprites.other.home.front_default,
-          gif: data.sprites.versions["generation-v"]["black-white"].animated
-            .front_default,
+          gif: data.sprites.versions["generation-v"]["black-white"].animated.front_default,
           types: typeText,
           typeColor: typeColor,
           abilities: data.abilities,
           stats: data.stats,
+          weight:data.weight,
+          height:data.height,
+
         };
       })
     );
     setPokemons(pokesData);
     setPokemonsAllData(pokesData);
   };
-
   const handleSelect = (pokemon) => setPokeSelect(Object.create(pokemon));
-
   const handleSearch = (text) => {
     const newPokeList = pokemonsAllData.filter((item) => {
       return (
@@ -74,9 +74,9 @@ const PokeList = () => {
       <Header handleSearch={handleSearch} />
       <Box className={classes.container}>
         {pokemons.length ? (
-          <Grid container spacing={1.8}>
+          <Grid container spacing={0.8} >
             {pokemons.map((pokemon) => (
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={3} >
                 <PokemonCard
                   key={pokemon.name}
                   pokemon={pokemon}

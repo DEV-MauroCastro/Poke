@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
 import { clearPokedexString } from "../utils";
 import { Dialog, Box, Typography } from "@mui/material";
-import pokedexImg from "../imgs/poketemplate1.png";
+import pokedexImg from "../imgs/cardtemplate.jpg";
 import { ReactComponent as PokeBallGray } from "../assets/pokeballGraySvg.svg";
 import { ReactComponent as PokemonLogoSvg } from "../assets/pokemonLogoSvg.svg";
 
@@ -10,20 +10,20 @@ const useStyles = makeStyles(() => ({
   pokemonImg: {
     position: "absolute",
     bottom: "55%",
-    left: "50%",
+    left: "60%",
     transform: "translate(-63%, 20%)",
-    height: "18%",
+    height: "30%",
   },
   pokemonTitle: {
     position: "absolute",
     fontWeight: "600",
-    color: "#aaa",
-    top: "55.18%",
-    right: "24.5%",
+    color: "#000",
+    top: "6%",
+    left: "8.5%",
     fontSize: "clamp(8px, 5vw, 25px)",
   },
   pokemonName: {
-    color: "#3a444d",
+    color: "#00000",
     textTransform: "capitalize",
   },
   flexRow: {
@@ -33,18 +33,20 @@ const useStyles = makeStyles(() => ({
   },
   infos: {
     position: "absolute",
-    top: "66%",
+    top: "63%",
     left: "57%",
     width: "80%",
     transform: "translate(-57%, 0)",
     display: "flex",
   },
   columns: {
-    width: "50%",
+    width: "33%",
     fontSize: "clamp(8px, 5vw, 1rem)",
+    color:"#000",
+    
   },
   stats: {
-    width: "72%",
+    width: "42%",
   },
   types: {
     backgroundColor: "rgba(0, 0, 0, 0.2)",
@@ -54,24 +56,24 @@ const useStyles = makeStyles(() => ({
   pokemonType: {
     position: "absolute",
     fontWeight: "600",
-    color: "#fff",
-    top: "21.8%",
-    right: "20%",
+    color: "#00000",
+    top: "6.3%",
+    right: "10%",
     fontSize: "clamp(8px, 5vw, 25px)",
   },
   pokemonIcon: {
     position: "absolute",
     top: "9%",
-    right: "19%",
+    right: "15%",
   },
   pokemonLogo: {
     position: "absolute",
     bottom: '4%',
-    right: "21%",
+    right: "11%",
   }
 }));
 
-const Pokedex = ({ pokeSelect }) => {
+const PokeCard = ({ pokeSelect }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -112,23 +114,33 @@ const Pokedex = ({ pokeSelect }) => {
       {pokeSelect.stats && (
         <Box className={classes.infos}>
           <Box className={[classes.columns, classes.stats]}>
-            <Typography variant="h3">Caracteristicas:</Typography>
+            <Typography variant="h4">Caracteristicas:</Typography>
             <Box pt={1}>
               {pokeSelect.stats.map((status) => (
                 <Typography key={status.stat.name}>
-                  {clearPokedexString(status.stat.name)}: {status.base_stat}
+                  {clearPokedexString(status.stat.name.toUpperCase())}: <b>{status.base_stat}</b>
                 </Typography>
               ))}
             </Box>
           </Box>
           <Box className={classes.columns}>
-            <Typography variant="h3">Habilidades:</Typography>
+            <Typography variant="h4">Habilidades:</Typography>
             <Box pt={1}>
               {pokeSelect.abilities.map((abilitiy) => (
                 <Typography key={abilitiy.ability.name}>
-                  {clearPokedexString(abilitiy.ability.name)}
+                  {clearPokedexString(abilitiy.ability.name)}                  
                 </Typography>
               ))}
+            </Box>
+          </Box>
+          <Box className={classes.columns}>
+            <Typography variant="h4">Fisico:</Typography>
+            <Box pt={1}>
+              Peso: {pokeSelect.weight} &nbsp;
+              
+            </Box>
+            <Box pt={1}>
+              Altura: {pokeSelect.height}
             </Box>
           </Box>
         </Box>
@@ -141,4 +153,4 @@ const Pokedex = ({ pokeSelect }) => {
   );
 };
 
-export default Pokedex;
+export default PokeCard;
